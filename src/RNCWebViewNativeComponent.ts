@@ -74,12 +74,12 @@ export type WebViewNavigationEvent = Readonly<{
   canGoForward: boolean;
   lockIdentifier: Double;
   navigationType:
-    | 'click'
-    | 'formsubmit'
-    | 'backforward'
-    | 'reload'
-    | 'formresubmit'
-    | 'other';
+  | 'click'
+  | 'formsubmit'
+  | 'backforward'
+  | 'reload'
+  | 'formresubmit'
+  | 'other';
   mainDocumentURL?: string;
 }>;
 
@@ -91,12 +91,12 @@ export type ShouldStartLoadRequestEvent = Readonly<{
   canGoForward: boolean;
   lockIdentifier: Double;
   navigationType:
-    | 'click'
-    | 'formsubmit'
-    | 'backforward'
-    | 'reload'
-    | 'formresubmit'
-    | 'other';
+  | 'click'
+  | 'formsubmit'
+  | 'backforward'
+  | 'reload'
+  | 'formresubmit'
+  | 'other';
   mainDocumentURL?: string;
   isTopFrame: boolean;
 }>;
@@ -286,6 +286,14 @@ export interface NativeProps extends ViewProps {
     method?: string;
     body?: string;
 
+    headers?: ReadonlyArray<Readonly<{ name: string; value: string }>>;
+    html?: string;
+    baseUrl?: string;
+  }>;
+  source: Readonly<{
+    uri?: string;
+    method?: string;
+    body?: string;
     headers?: ReadonlyArray<Readonly<{ name: string; value: string }>>;
     html?: string;
     baseUrl?: string;
