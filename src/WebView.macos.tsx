@@ -224,7 +224,6 @@ const WebViewComponent = forwardRef<{}, MacOSWebViewProps>(
         ref={webViewRef}
         source={sourceResolved}
         style={webViewStyles}
-        injectedJavaScriptObject={JSON.stringify(injectedJavaScriptObject)}
         {...nativeConfig?.props}
       />
     );
