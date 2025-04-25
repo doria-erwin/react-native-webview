@@ -172,30 +172,31 @@ const WebViewComponent = forwardRef<{}, MacOSWebViewProps>(
     const newSource =
       typeof sourceResolved === 'object'
         ? Object.entries(sourceResolved as WebViewSourceUri).reduce(
-            (prev, [currKey, currValue]) => {
-              return {
-                ...prev,
-                [currKey]:
-                  currKey === 'headers' &&
+          (prev, [currKey, currValue]) => {
+            return {
+              ...prev,
+              [currKey]:
+                currKey === 'headers' &&
                   currValue &&
                   typeof currValue === 'object'
-                    ? Object.entries(currValue).map(([key, value]) => {
-                        return {
-                          name: key,
-                          value,
-                        };
-                      })
-                    : currValue,
-              };
-            },
-            {}
-          )
+                  ? Object.entries(currValue).map(([key, value]) => {
+                    return {
+                      name: key,
+                      value,
+                    };
+                  })
+                  : currValue,
+            };
+          },
+          {}
+        )
         : sourceResolved;
 
     const webView = (
       <NativeWebView
         key="webViewKey"
         {...otherProps}
+        messagingModuleName="RNCWebView"
         javaScriptEnabled={javaScriptEnabled}
         cacheEnabled={cacheEnabled}
         useSharedProcessPool={useSharedProcessPool}
@@ -221,7 +222,6 @@ const WebViewComponent = forwardRef<{}, MacOSWebViewProps>(
         incognito={incognito}
         mediaPlaybackRequiresUserAction={mediaPlaybackRequiresUserAction}
         ref={webViewRef}
-        // @ts-expect-error old arch only
         source={sourceResolved}
         style={webViewStyles}
         {...nativeConfig?.props}

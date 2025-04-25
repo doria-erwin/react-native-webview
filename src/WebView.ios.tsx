@@ -208,24 +208,24 @@ const WebViewComponent = forwardRef<{}, IOSWebViewProps>(
     const newSource =
       typeof sourceResolved === 'object'
         ? Object.entries(sourceResolved as WebViewSourceUri).reduce(
-            (prev, [currKey, currValue]) => {
-              return {
-                ...prev,
-                [currKey]:
-                  currKey === 'headers' &&
+          (prev, [currKey, currValue]) => {
+            return {
+              ...prev,
+              [currKey]:
+                currKey === 'headers' &&
                   currValue &&
                   typeof currValue === 'object'
-                    ? Object.entries(currValue).map(([key, value]) => {
-                        return {
-                          name: key,
-                          value,
-                        };
-                      })
-                    : currValue,
-              };
-            },
-            {}
-          )
+                  ? Object.entries(currValue).map(([key, value]) => {
+                    return {
+                      name: key,
+                      value,
+                    };
+                  })
+                  : currValue,
+            };
+          },
+          {}
+        )
         : sourceResolved;
 
     const webView = (
@@ -276,7 +276,6 @@ const WebViewComponent = forwardRef<{}, IOSWebViewProps>(
         style={webViewStyles}
         hasOnFileDownload={!!onFileDownload}
         ref={webViewRef}
-        // @ts-expect-error old arch only
         source={sourceResolved}
         {...nativeConfig?.props}
       />
